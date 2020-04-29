@@ -23,7 +23,20 @@ userRouter.get("/:id", (req, res) => {
     if (!user) return res.status(404).end();
 
     res.json(user);
-})
+});
+
+userRouter.delete("/:id", (req, res) => {
+
+    const id = parseInt(req.params.id,10);
+    if(Number.isNaN(id)){
+        return res.status(400).end();
+    }
+    const users = lists.filter(u => u.id === id);
+
+
+    res.status(204).end()
+
+});
 
 
 module.exports = userRouter;

@@ -1,4 +1,3 @@
-
 const request = require("supertest");
 const should = require("should");
 const app = require("../../app");
@@ -62,7 +61,7 @@ describe('GET /user/1은', () => {
                 .get('/user/one')
                 .expect(400)
                 .end(done)
-        })
+        });
 
         it('id로 유저를 찾을 수 없을 경우', (done) => {
             request(app)
@@ -72,13 +71,40 @@ describe('GET /user/1은', () => {
         })
 
     })
-
-
-})
+});
 
 
 describe('DELETE /user/1은', () => {
+    describe('성공시', ()=>{
+        it('204를 응답한다. ', (done)=>{
+            request(app)
+                .delete('/user/1')
+                .expect(204)
+                .end(done)
+        });
+    });
 
-    describe('/user')
+    describe('실패시', ()=>{
+        it('id가 숫자가 아닌경우 400으로 응답한다.', (done) => {
+            request(app)
+                .delete('/user/one')
+                .expect(400)
+                .end(done)
+        })
+    })
 
-})
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
