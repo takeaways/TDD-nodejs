@@ -1,0 +1,36 @@
+{
+	"name": "tdd-nodejs",
+	"version": "1.0.0",
+	"description": "# NodeJs",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon",
+		"test": "mocha Utils/TDD/user.spec.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nomadGeonilJang/TDD-nodejs.git"
+	},
+	"author": "GeonilJang",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/nomadGeonilJang/TDD-nodejs/issues"
+	},
+	"homepage": "https://github.com/nomadGeonilJang/TDD-nodejs#readme",
+	"dependencies": {
+		"@types/node": "^13.13.4",
+		"cookie-parser": "^1.4.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"express-session": "^1.17.1",
+		"morgan": "^1.10.0",
+		"nodemon": "^2.0.3",
+		"ts-node": "^8.9.1",
+		"typescript": "^3.8.3"
+	},
+	"devDependencies": {
+		"mocha": "^7.1.2",
+		"should": "^13.2.3",
+		"supertest": "^4.0.2"
+	}
+}

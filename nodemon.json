@@ -1,0 +1,4 @@
+{
+	"exec": "node app.js",
+	"ext": "js json"
+}

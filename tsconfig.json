@@ -1,0 +1,24 @@
+/*
+--allowJs : js도 컴파일 허용한다. 기존의 js파일을 타입스크립트로 바꾸고 싶다.
+-d : d.ts 파일을 만들어 준다.
+--seModuleInterop : import * as React from 'react' -> import React from 'react'[위험]
+--lib : 해당 함수들 사용가능
+--outDir : 결과물 출력물
+--target : 기본ES3로 컴파일 해준다. ex11 까지{es5}
+--types : 커스텀 d.ts 파일들의 위치
+*/
+
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+		"noImplicitReturns": true,
+		"strict": true, //기본 false이기 때문에 true로 변경해주는게 좋다.
+		"strictNullChecks": true, // null 과 undefined를 구별한다.
+		"lib": ["es2020"],
+		"target": "ES6",
+		"module": "commonJS",
+		"outDir": "./dist"
+	}
+}
