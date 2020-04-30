@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "nodemon",
-		"test": "mocha Utils/TDD/user.spec.js"
+		"test": "NODE_ENV=test mocha Utils/TDD/user.spec.js"
 	},
 	"repository": {
 		"type": "git",

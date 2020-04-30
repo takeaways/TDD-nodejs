@@ -1,4 +1,4 @@
 {
-	"exec": "node app.js",
+	"exec": "node bin/www.js",
 	"ext": "js json"
 }
