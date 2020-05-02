@@ -1,8 +1,10 @@
 const request = require("supertest");
 const should = require("should");
+
 const app = require("../../app");
 const db = require("../../Models");
 
+//only를 사용 해서 해당 케이스만 실행 시킬 수도 있다.
 describe('GET /user는', () => {
 
     describe('성공시', () => {
@@ -138,7 +140,7 @@ describe('POST /user는', ()=>{
     });
 });
 
-describe.only('PUT /user/1', () => {
+describe('PUT /user/1', () => {
     const users = [{name:"Jin"},{name:"Kelly"},{name:"Holy"}];
     before(() => db.sequelize.sync({force:true}));
     before(()=>db.user.bulkCreate(users));

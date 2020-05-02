@@ -8,7 +8,7 @@ exports.getUser = async (req, res) => {
 
     if (Number.isNaN(limit)) return res.status(400).end();
     const users = await User.findAll({limit});
-
+console.log(users)
     return res.json(users.slice(0, limit));
 };
 

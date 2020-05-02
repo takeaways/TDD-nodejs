@@ -1,4 +1,4 @@
-const app = require("../Middlewares");
+const app = require("../app");
 const dbSync = require("./db");
 
 dbSync().then(()=>{
@@ -7,5 +7,6 @@ dbSync().then(()=>{
         console.log("server start port 7000");
     });
 });
+
 
 

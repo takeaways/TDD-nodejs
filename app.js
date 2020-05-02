@@ -1,6 +1,16 @@
-const app = require("./Middlewares");
-const router = require("./Routers");
+const express = require("express");
+const app = express();
 
+
+const dotenv = require("dotenv");
+dotenv.config();
+const ENV = process.env.NODE_ENV;
+
+require("./Middlewares")(app, ENV);
+
+
+
+const router = require("./Routers");
 //routers
 app.use("/user", router.user);
 app.use("/post", router.post);
@@ -9,9 +19,5 @@ app.use("/post", router.post);
 app.use((error, req, res, next) => {
     console.log(error)
 });
-
-// app.listen(7000, () => {
-//     console.log(`server start port 7000`);
-// });
 
 module.exports = app;

@@ -1,19 +1,14 @@
 const express = require("express");
-const dotenv = require("dotenv");
 const morgan = require("morgan");
 
+module.exports = (app, ENV) => {
+
+    app.use(express.json());
+    app.use(express.urlencoded({extended:true}));
 
 
-const app = express();
-dotenv.config();
+    if(ENV!== "test"){
+        app.use(morgan(ENV === "dev" ? "dev" : "combined"));
+    }
 
-const ENV = process.env.NODE_ENV;
-
-if(ENV!== "test"){
-    app.use(morgan(ENV === "dev" ? "dev" : "combined"));
-}
-
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-
-module.exports = app;
+};
