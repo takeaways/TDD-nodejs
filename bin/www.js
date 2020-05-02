@@ -1,5 +1,11 @@
 const app = require("../Middlewares");
+const dbSync = require("./db");
 
-app.listen(7000, ()=>{
-    console.log("server start port 7000");
+dbSync().then(()=>{
+    console.log('Sync Database..');
+    app.listen(7000, ()=>{
+        console.log("server start port 7000");
+    });
 });
+
+

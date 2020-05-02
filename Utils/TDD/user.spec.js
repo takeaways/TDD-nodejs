@@ -1,23 +1,23 @@
 const request = require("supertest");
 const should = require("should");
 const app = require("../../app");
-
-// app.listen(7000, () => {
-//     console.log(`server start port 7000`);
-// });
+const db = require("../../Models");
 
 describe('GET /user는', () => {
 
     describe('성공시', () => {
+        const users = [{name:"Jin"},{name:"Kelly"},{name:"Holy"}]
+        before(() => db.sequelize.sync({force:true}))
+        before(()=>db.user.bulkCreate(users));
 
         it('유저 객체를 담은 배열로 응답한다.', (done) => {
             request(app)
                 .get('/user')
                 .end((err, res) => {
-                    res.body.should.be.instanceOf(Array)
+                    res.body.should.be.instanceOf(Array);
                     done();
                 })
-        })
+        });
 
         it('최대 limit갯 수 만큼 응답한다', (done) => {
             request(app)
@@ -26,9 +26,8 @@ describe('GET /user는', () => {
                     res.body.should.have.lengthOf(2)
                     done();
                 })
-        })
-
-    })
+        });
+    });
 
     describe('실패시', () => {
         it('limit이 숫자형이 아닐경우 400을 응답한다.', (done) => {
@@ -41,7 +40,9 @@ describe('GET /user는', () => {
 
 });
 describe('GET /user/:id 는', () => {
-
+    const users = [{name:"Jin"},{name:"Kelly"},{name:"Holy"}]
+    before(() => db.sequelize.sync({force:true}))
+    before(()=>db.user.bulkCreate(users));
     describe('성공시', () => {
         it('id가 1인 유저 정보객체를 반환한다.', (done) => {
             request(app)
@@ -69,7 +70,12 @@ describe('GET /user/:id 는', () => {
         });
     });
 });
+
 describe('DELETE /user/:id 는', () => {
+    const users = [{name:"Jin"},{name:"Kelly"},{name:"Holy"}]
+    before(() => db.sequelize.sync({force:true}))
+    before(()=>db.user.bulkCreate(users));
+
     describe('성공시', () => {
         it('204를 응답한다. ', (done) => {
             request(app)
@@ -88,6 +94,9 @@ describe('DELETE /user/:id 는', () => {
     })
 });
 describe('POST /user는', ()=>{
+    const users = [{name:"Jin"},{name:"Kelly"},{name:"Holy"}];
+    before(() => db.sequelize.sync({force:true}));
+    before(()=>db.user.bulkCreate(users));
 
     describe('성공시', ()=>{
         let body,
@@ -103,13 +112,6 @@ describe('POST /user는', ()=>{
                 })
         });
 
-       // it('201 상태 코드를 반환 한다.', done => {
-       //     request(app)
-       //         .post('/user')
-       //         .send({name:"GeonilJang"})
-       //         .expect(201)
-       //         .end(done)
-       // });
        it('생성된 유저 객체를 반환한다.', ()=>{ //done은 비동기 테스트 일 경우에만 넣어 준다.
           body.should.have.property('id');
        });
@@ -129,21 +131,24 @@ describe('POST /user는', ()=>{
         it("name이 중복일 경우 409를 반환한다.", (done)=>{
             request(app)
                 .post("/user")
-                .send({name:"May"})
+                .send({name:"Jin"})
                 .expect(409)
                 .end(done)
         });
     });
 });
 
-describe('PUT /user/1', () => {
+describe.only('PUT /user/1', () => {
+    const users = [{name:"Jin"},{name:"Kelly"},{name:"Holy"}];
+    before(() => db.sequelize.sync({force:true}));
+    before(()=>db.user.bulkCreate(users));
 
     describe("성공시...", ()=>{
 
         it('사용자 정보를 업데이트 합니다...', done => {
-            const name = "JangGeonil";
+            const name = "GeonilJang";
            request(app)
-               .put('/user/3')
+               .put('/user/2')
                .send({name})
                .expect(200)
                .end((err, res) => {
@@ -151,7 +156,7 @@ describe('PUT /user/1', () => {
                    done();
                })
         });
-    })
+    });
 
 
     describe("실패시...", ()=>{
@@ -178,7 +183,7 @@ describe('PUT /user/1', () => {
         it('이름이 중복을 영우 409를 응답한다.', done=>{
             request(app)
                 .put("/user/1")
-                .send({name:"Hello"})
+                .send({name:"Holy"})
                 .expect(409)
                 .end(done)
         })

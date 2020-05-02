@@ -123,3 +123,35 @@
 2. 실패
    - limit이 숫자형이 아니면 400을 응답한다.
    - offset이 숫자형이 아니면 400을 응답한다.
+
+# 데이터 베이스
+
+### SqlLite3 사용 해당 디비는 파일형 데이터 베이스입니다.
+
+### SQL
+
+1. insert users ('name') values ('alice');
+2. select \* from users;
+3. update users set name = 'bek' where is =1 ;
+4. delete from users where id =1;
+
+### ORM
+
+1. 데이터베이스를 객체로 추상화해 논 것을 ORM(Object Relational Mapping)
+2. 쿼리를 직접 작성하는 대신 ORM의 메소드로 데이터 관리할 수 있는것이 장점이다.
+3. 노드에서는 Sequelize를 많이 사용한다.
+
+4. insert users ('name') values ('alice');
+   - User.create({name:'alice'});
+5. select \* from users;
+   - User.findAll()
+6. update users set name = 'bek' where is =1 ;
+   - User.update({name:'beck'},{where:{id:1}});
+7. delete from users where id =1;
+   - User.destroy({where:{id:1}})
+
+### Model
+
+1. 데이터베이스 테이블을 ORM으로 추상화한것을 모델이라고 한다.
+   - sequelize.define(): 모델 정의
+   - sequelize.sync():데이터베이스 연동
